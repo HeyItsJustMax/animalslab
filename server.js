@@ -102,13 +102,18 @@ app.get("/animals", (req, res) => {
     })
 })
 
+// THE NEW ROUTE (GET => /animals/new)
+app.get("/animals/new", (req, res) => {
+    res.render("animals/new.ejs")
+})
+
 // THE SHOW ROUTE (GET => /animals/:id)
 app.get("/animals/:id", (req, res) => {
     // get the id from params
     const id = req.params.id
     
     // find the particular animal from the database
-    Animal.findById(id, (err, fruit) => {
+    Animal.findById(id, (err, animal) => {
         res.render("animals/show.ejs", {animal})
     })
 })
