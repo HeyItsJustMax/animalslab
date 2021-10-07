@@ -95,6 +95,13 @@ app.get("/animals/seed", (req, res) => {
     })
 })
 
+// INDEX ROUTE (GET => /animals)
+app.get("/animals", (req, res) => {
+    Animal.find({}, (err, animals) => {
+        res.render("animals/index.ejs", { animals })
+    })
+})
+
 
 // =============== //
 // SERVER LISTENER //
