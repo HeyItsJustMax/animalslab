@@ -73,6 +73,28 @@ app.get("/", (req, res) => {
     res.send("your server is running...better catch it.")
 })
 
+// SEED ROUTE
+app.get("/animals/seed", (req, res) => {
+
+    // array of starter animals
+    const startAnimals = [
+        {species: "Lion", extinct: false, location: "Africa", lifeExpectancy: 12},
+        {species: "Tiger", extinct: false, location: "South-East Asia", lifeExpectancy: 10},
+        {species: "Lynx", extinct: false, location: "North America & Europe", lifeExpectancy: 15},
+        {species: "Snow Leopard", extinct: false, location: "Central & South Asia", lifeExpectancy: 12},
+        {species: "Cheetah", extinct: false, location: "Africa", lifeExpectancy: 12}
+    ]
+
+    // Delete all animals
+    Animal.remove({}, (err, data) => {
+        // Seed Starter Animals
+        Animal.create(startAnimals, (err, data) => {
+            // send created animals as response to confirm creation
+            res.json(data)
+        })
+    })
+})
+
 
 // =============== //
 // SERVER LISTENER //
