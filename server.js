@@ -95,10 +95,21 @@ app.get("/animals/seed", (req, res) => {
     })
 })
 
-// INDEX ROUTE (GET => /animals)
+// THE INDEX ROUTE (GET => /animals)
 app.get("/animals", (req, res) => {
     Animal.find({}, (err, animals) => {
         res.render("animals/index.ejs", { animals })
+    })
+})
+
+// THE SHOW ROUTE (GET => /animals/:id)
+app.get("/animals/:id", (req, res) => {
+    // get the id from params
+    const id = req.params.id
+    
+    // find the particular animal from the database
+    Animal.findById(id, (err, fruit) => {
+        res.render("animals/show.ejs", {animal})
     })
 })
 
