@@ -107,6 +107,17 @@ app.get("/animals/new", (req, res) => {
     res.render("animals/new.ejs")
 })
 
+// THE CREATE ROUTE (POST => /animals)
+app.post("/animals", (req, res) => {
+    // check if the extinct property should be true or false
+    req.body.extinct = req.body.extinct === "on" ? true : false
+    // create the new animal
+    Animal.create(req.body, (err, animal) => {
+        // redirect the user back to the main animals page after animal is created
+        res.redirect("/animals")
+    })
+})
+
 // THE SHOW ROUTE (GET => /animals/:id)
 app.get("/animals/:id", (req, res) => {
     // get the id from params
